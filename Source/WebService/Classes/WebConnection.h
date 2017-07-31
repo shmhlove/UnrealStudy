@@ -2,7 +2,6 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "WebConnection.generated.h"
 
@@ -13,4 +12,7 @@ UCLASS()
 class WEBSERVICE_API UWebConnection : public UObject
 {
 	GENERATED_BODY()
+
+public:
+	UWebConnection();
 };
