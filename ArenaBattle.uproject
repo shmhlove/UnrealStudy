@@ -11,6 +11,10 @@
 			"AdditionalDependencies": [
 				"Engine"
 			]
-		}
+		},
+        { 
+            "Name": "WebService", 
+            "Type": "Runtime" 
+        }
 	]
 }
