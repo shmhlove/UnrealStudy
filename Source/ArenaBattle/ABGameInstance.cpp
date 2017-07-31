@@ -14,4 +14,16 @@ void UABGameInstance::Init()
 {
 	Super::Init();
 	AB_LOG_CALLONLY(Warning);
+	
+	auto* ClassInfo1 = WebConnection->GetClass();
+	auto* ClassInfo2 = UWebConnection::StaticClass();
+	
+	if (ClassInfo1 == ClassInfo2)
+	{
+		AB_LOG(Warning, TEXT("%s"), TEXT("ClassInfo1 is same with ClassInfo2!!"));
+	}
+	else
+	{
+		AB_LOG(Warning, TEXT("%s"), TEXT("ClassInfo1 is different with ClassInfo2!!"));
+	}
 }
