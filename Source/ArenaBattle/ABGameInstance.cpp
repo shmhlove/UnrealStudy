@@ -2,6 +2,8 @@
 
 #include "ABGameInstance.h"
 
-
-
-
+void UABGameInstance::Init()
+{
+	Super::Init();
+	UE_LOG(LogClass, Warning, TEXT("%s"), TEXT("Game Instance Init!"));
+}

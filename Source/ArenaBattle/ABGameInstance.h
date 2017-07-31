@@ -14,7 +14,6 @@ class ARENABATTLE_API UABGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
 	
-	
-	
-	
+public:
+	virtual void Init() override;
 };
