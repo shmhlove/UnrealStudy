@@ -6,10 +6,12 @@ public class WebService : ModuleRules
 {
     public WebService(ReadOnlyTargetRules Target) : base(Target)
     {
-        // Public에는 헤더파일
+		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+				
+        // HeaderFile in Public
         PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine" });
 
-        // Private는 소스파일
+        // SourceFile in Private
         PrivateDependencyModuleNames.AddRange(new string[] { });
 
         // Uncomment if you are using Slate UI

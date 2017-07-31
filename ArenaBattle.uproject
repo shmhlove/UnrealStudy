@@ -12,9 +12,13 @@
 				"Engine"
 			]
 		},
-        { 
-            "Name": "WebService", 
-            "Type": "Runtime" 
-        }
+		{
+			"Name": "WebService",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"CoreUObject"
+			]
+		}
 	]
 }
