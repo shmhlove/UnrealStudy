@@ -3,8 +3,9 @@
 #include "../Pubilc/WebService.h"
 #include "WebConnection.h"
 
+DEFINE_LOG_CATEGORY(WebConnection);
 
 UWebConnection::UWebConnection()
 {
-	UE_LOG(LogClass, Warning, TEXT("%s"), TEXT("WebConnection Constructor Call!!"));
+	UE_LOG(WebConnection, Warning, TEXT("%s"), TEXT("WebConnection Constructor Call!!"));
 }
