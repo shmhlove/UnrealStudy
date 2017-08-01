@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "ArenaBattle.h"
 #include "ABGameInstance.h"
+#include "ArenaBattle.h"
 
 UABGameInstance::UABGameInstance()
 {
@@ -25,5 +25,25 @@ void UABGameInstance::Init()
 	else
 	{
 		AB_LOG(Warning, TEXT("%s"), TEXT("ClassInfo1 is different with ClassInfo2!!"));
+	}
+
+	for (TFieldIterator<UProperty> it(ClassInfo1); it; ++it)
+	{
+		AB_LOG(Warning, TEXT("Field : %s, Type : %s"), *it->GetName(), *it->GetClass()->GetName());
+		UStrProperty* strProp = FindField<UStrProperty>(ClassInfo1, *it->GetName());
+		if (NULL != strProp)
+		{
+			AB_LOG(Warning, TEXT("Value : %s"), *strProp->GetPropertyValue_InContainer(WebConnection));
+		}
+	}
+
+	for (const auto& entry : ClassInfo1->NativeFunctionLookupTable)
+	{
+		AB_LOG(Warning, TEXT("Function : %s"), *entry.Name.ToString());
+		UFunction* func = ClassInfo1->FindFunctionByName(entry.Name);
+		if (0 == func->ParmsSize)
+		{
+			WebConnection->ProcessEvent(func, NULL);
+		}
 	}
 }

@@ -9,3 +9,8 @@ UWebConnection::UWebConnection()
 {
 	UE_LOG(WebConnection, Warning, TEXT("%s"), TEXT("WebConnection Constructor Call!!"));
 }
+
+void UWebConnection::RequestToken()
+{
+	UE_LOG(WebConnection, Warning, TEXT("%s"), TEXT("RequestToken Call!!"));
+}
