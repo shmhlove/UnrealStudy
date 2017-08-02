@@ -12,6 +12,11 @@ UABGameInstance::UABGameInstance()
 	AB_LOG(Warning, TEXT("%s"), TEXT("Game Instance Constructor Call End!!"));
 }
 
+void UABGameInstance::RequestTokenComplete(const FString& Token)
+{
+	AB_LOG(Warning, TEXT("Token : %s"), *Token);
+}
+
 void UABGameInstance::Init()
 {
 	Super::Init();
@@ -98,4 +103,8 @@ void UABGameInstance::Init()
 		UWebConnection* conn = *it;
 		AB_LOG(Warning, TEXT("WebConnection Object Host : %s"), *conn->Host);
 	}
+
+	// µô¸®°ÔÀÌÆ®
+	WebConnection->TokenCompleteDelegate.BindUObject(this, &UABGameInstance::RequestTokenComplete);
+	WebConnection->RequestToken(TEXT("destiny"));
 }

@@ -28,4 +28,8 @@ public:
 	class UWebConnection* WebConnectionNew;
 
 	FStreamableManager AssetLoader;
+
+public:
+	UFUNCTION()
+	void RequestTokenComplete(const FString& Token);
 };

@@ -2,8 +2,11 @@
 
 #pragma once
 
+#include "Runtime/Core/Public/Delegates/DelegateCombinations.h"
 #include "UObject/NoExportTypes.h"
 #include "WebConnection.generated.h"
+
+DECLARE_DELEGATE_OneParam(FTokenCompleteSignature, const FString&);
 
 /**
  * 
@@ -25,7 +28,8 @@ public:
 
 public:
 	UFUNCTION()
-	void RequestToken();
+	void RequestToken(const FString& UserID);
+	FTokenCompleteSignature TokenCompleteDelegate;
 };
 
 DECLARE_LOG_CATEGORY_EXTERN(WebConnection, Log, All);

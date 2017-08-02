@@ -7,7 +7,10 @@
 #include "Runtime/Engine/Classes/Components/CapsuleComponent.h"
 #include "Runtime/Engine/Classes/Components/ArrowComponent.h"
 #include "Runtime/Engine/Classes/GameFramework/SpringArmComponent.h"
+#include "Runtime/Engine/Classes/GameFramework/FloatingPawnMovement.h"
 #include "Runtime/Engine/Classes/Camera/CameraComponent.h"
+
+#include "Kismet/KismetMathLibrary.h"
 #include "GameFramework/Pawn.h"
 #include "ABPawn.generated.h"
 
@@ -46,13 +49,31 @@ public:
     UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Camera")
     class UCameraComponent* Camera;
  
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Movement")
+	class UFloatingPawnMovement* Movement;
+
     UPROPERTY(config, BlueprintReadWrite, EditDefaultsOnly, Category = "Stat")
     float MaxHP;
  
     UPROPERTY(BlueprintReadWrite, EditInstanceOnly, Category = "Stat")
     float CurrentHP;
 
+	UFUNCTION()
+	void CharacterMeshDeferred();
+	//FStreamableDelegate StreamableDelegate;
+
 private:
+	int32 NewIndex;
+
 	UPROPERTY(config)
 	TArray<FStringAssetReference> CharacterAssets;
+
+	float CurrentLeftRightVal;
+	float CurrentUpDownVal;
+
+	UFUNCTION()
+	void UpDownInput(float NewInputVal);
+
+	UFUNCTION()
+	void LeftRightInput(float NewInputVal);
 };
