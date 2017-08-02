@@ -7,7 +7,7 @@
 #include "GameFramework/Actor.h"
 #include "Weapon.generated.h"
 
-UCLASS()
+UCLASS(BlueprintType, Blueprintable)
 class ARENABATTLE_API AWeapon : public AActor
 {
 	GENERATED_BODY()
@@ -25,7 +25,14 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 public:
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
 	class USkeletalMeshComponent* Weapon;
-	
+
+public:
+	UFUNCTION(BlueprintCallable, Category = "Weapon|Stat")
+	float GetDamage() { return baseDamage; }
+
+private:
+	UPROPERTY(BlueprintReadWrite, EditInstanceOnly, Category = "Stat", meta = (AllowPrivateAccess = "true"))
+	float baseDamage;
 };
