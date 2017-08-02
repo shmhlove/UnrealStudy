@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Engine/GameInstance.h"
+#include "Runtime/Engine/Classes/Engine/StreamableManager.h"
 // Build.cs에 public DependencyModuleNames로 인해 경로지정없이 사용할 수 있음.
 #include "WebConnection.h"
 #include "ABGameInstance.generated.h"
@@ -25,4 +26,6 @@ public:
 
 	UPROPERTY()
 	class UWebConnection* WebConnectionNew;
+
+	FStreamableManager AssetLoader;
 };
