@@ -6,7 +6,9 @@
 #include "UObject/NoExportTypes.h"
 #include "WebConnection.generated.h"
 
-DECLARE_DELEGATE_OneParam(FTokenCompleteSignature, const FString&);
+//DECLARE_DELEGATE_OneParam(FTokenCompleteSignature, const FString&);
+// 블루프린터에서 이벤트를 연결할 수 있도록 수정
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FTokenCompleteSignature, const FString&, Token);
 
 /**
  * 
@@ -29,6 +31,12 @@ public:
 public:
 	UFUNCTION()
 	void RequestToken(const FString& UserID);
+
+public:
+	//FTokenCompleteSignature TokenCompleteDelegate;
+
+	// 블루프린터에서 이벤트를 연결할 수 있도록 수정
+	UPROPERTY(BlueprintAssignable, Category = "WebService")
 	FTokenCompleteSignature TokenCompleteDelegate;
 };
 

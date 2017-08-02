@@ -105,6 +105,7 @@ void UABGameInstance::Init()
 	}
 
 	// µô¸®°ÔÀÌÆ®
-	WebConnection->TokenCompleteDelegate.BindUObject(this, &UABGameInstance::RequestTokenComplete);
+	//WebConnection->TokenCompleteDelegate.BindUObject(this, &UABGameInstance::RequestTokenComplete);
+	WebConnection->TokenCompleteDelegate.AddDynamic(this, &UABGameInstance::RequestTokenComplete);
 	WebConnection->RequestToken(TEXT("destiny"));
 }

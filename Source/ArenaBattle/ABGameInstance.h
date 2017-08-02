@@ -21,8 +21,8 @@ public:
 	virtual void Init() override;
 
 public:
-	UPROPERTY()
-	class UWebConnection* WebConnection;
+    UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "WebService")
+    class UWebConnection* WebConnection;
 
 	UPROPERTY()
 	class UWebConnection* WebConnectionNew;
