@@ -68,6 +68,57 @@ void UABGameInstance::Init()
 	if (NULL == WebConnectionNew)
 	{
 		WebConnectionNew = NewObject<UWebConnection>(this);
+		WebConnectionNew->Host = TEXT("127.0.0.7");
+		WebConnectionNew->URI = TEXT("/");
+	}
+
+	// 패키지 파일로 시리얼라이즈
+	FString PackageName = TEXT("/Temp/SavedWebConnection");
+	UPackage* NewPackage = CreatePackage(nullptr, *PackageName);
+	FString PackageFileName = FPackageName::LongPackageNameToFilename(PackageName, FPackageName::GetAssetPackageExtension());
+
+	if (UPackage::SavePackage(NewPackage, WebConnectionNew, RF_Standalone, *PackageFileName))
+	{
+		UPackage* SavedPackage = ::LoadPackage(NULL, *PackageFileName, LOAD_None);
+		TArray<UObject *> ObjectsInPackage;
+		GetObjectsWithOuter(SavedPackage, ObjectsInPackage, false);
+		for (const auto& EachObject : ObjectsInPackage)
+		{
+			UWebConnection* WebConnectionFromFile = Cast<UWebConnection>(EachObject);
+			if (WebConnectionFromFile)
+			{
+				AB_LOG(Warning, TEXT("WebConnection From File : Host %s , URI %s"), *WebConnectionFromFile->Host, *WebConnectionFromFile->URI);
+			}
+		}
+	}
+
+	// 일반파일로 시리얼라이즈
+	FString FullPath = FString::Printf(TEXT("%s%s"), *FPaths::GameSavedDir(), TEXT("WebConnection.txt"));
+	FArchive* ArWriter = IFileManager::Get().CreateFileWriter(*FullPath);
+	if (ArWriter)
+	{
+		*ArWriter << WebConnectionNew->Host;
+		*ArWriter << WebConnectionNew->URI;
+		// *ArWriter << *WebConnectionNew;
+		ArWriter->Close();
+		delete ArWriter;
+		ArWriter = NULL;
+	}
+
+	TSharedPtr<FArchive> FileReader = MakeShareable(IFileManager::Get().CreateFileReader(*FullPath));
+	if (FileReader.IsValid())
+	{
+		FString Host;
+		FString URI;
+		*FileReader.Get() << Host;
+		*FileReader.Get() << URI;
+		FileReader->Close();
+		AB_LOG(Warning, TEXT("WebConnection : Host %s , URI %s"), *Host, *URI);
+		
+		// UWebConnection* WebConnectionFromFile = NewObject<UWebConnection>(this);
+		// *FileReader.Get() << *WebConnectionFromFile;
+		// FileReader->Close();
+		// AB_LOG(Warning, TEXT("WebConnection From File : Host %s , URI %s"), *WebConnectionFromFile->Host, *WebConnectionFromFile->URI);
 	}
 
 	AB_LOG(Warning, TEXT("Outer of NewObject : %s"), *WebConnectionNew->GetOuter()->GetClass()->GetName());
