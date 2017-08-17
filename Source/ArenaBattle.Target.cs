@@ -11,4 +11,4 @@ public class ArenaBattleTarget : TargetRules
 
 		ExtraModuleNames.AddRange( new string[] { "ArenaBattle", "WebService" } );
 	}
-}
+}  
