@@ -22,7 +22,7 @@ class ARENABATTLE_API UABGameInstance : public UGameInstance
 	
 public:
 	UABGameInstance();
-	virtual void Init() override;
+	override void Init();
 
 public:
     UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "WebService")

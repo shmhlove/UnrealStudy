@@ -44,6 +44,8 @@ AABPawn::AABPawn()
 // Called when the game starts or when spawned
 void AABPawn::BeginPlay()
 {
+	GEngine->AddOnScreenDebugMessage(-1, (float)_I32_MAX, FColor::Blue, TEXT("AABPawn BeginPlay - Screen"));
+
 	Super::BeginPlay();
 	CurrentHP = MaxHP;
 
